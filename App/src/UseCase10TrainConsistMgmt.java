@@ -1,0 +1,48 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class UseCase10TrainConsistMgmt {
+
+    // 🔹 Bogie class (reuse from previous UCs)
+    static class Bogie {
+        String name;
+        int capacity;
+
+        Bogie(String name, int capacity) {
+            this.name = name;
+            this.capacity = capacity;
+        }
+    }
+
+    public static void main(String[] args) {
+
+        // 🔹 Welcome Message
+        System.out.println("=========================================");
+        System.out.println("   UC10 - Count Total Seats in Train");
+        System.out.println("=========================================\n");
+
+        // 🔹 Create list of bogies
+        List<Bogie> bogies = new ArrayList<>();
+
+        bogies.add(new Bogie("Sleeper", 72));
+        bogies.add(new Bogie("AC Chair", 56));
+        bogies.add(new Bogie("First Class", 24));
+        bogies.add(new Bogie("Sleeper", 70));
+
+        // 🔹 Display bogies
+        System.out.println("Bogies in Train:");
+        for (Bogie b : bogies) {
+            System.out.println(b.name + " -> " + b.capacity);
+        }
+
+        // 🔹 Aggregation using Stream reduce
+        int totalSeats = bogies.stream()
+                .map(b -> b.capacity)          // extract capacity
+                .reduce(0, Integer::sum);      // sum all
+
+        // 🔹 Display total
+        System.out.println("\nTotal Seating Capacity of Train: " + totalSeats);
+
+        System.out.println("\nUC10 aggregation completed...");
+    }
+}
